@@ -16,10 +16,10 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cors());
 // passport middleware
-// server.use(passport.initialize());
+server.use(passport.initialize());
 
 //passport config
-// require("../config/passport.js")(passport);
+require("../config/passport.js")(passport);
 
 //config routes
 server.get("/", (req, res) => {
@@ -27,6 +27,5 @@ server.get("/", (req, res) => {
 });
 
 server.use("/api/auth", authRoutes);
-
 
 module.exports = server;
