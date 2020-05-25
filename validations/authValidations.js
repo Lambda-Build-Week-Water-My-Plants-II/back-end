@@ -1,13 +1,12 @@
-const registerValidation = (user) => {
+const stringValidation = ({ username, password }) => {
   return Boolean(
-    user.username && user.password && typeof user.password === "string"
+    username &&
+      password &&
+      typeof password === "string" &&
+      typeof username === "string"
   );
 };
-const loginValidation = (user) => {
-  return Boolean(
-    user.username && user.password && typeof user.password === "string"
-  );
-};
+
 
 const validateNumber = (phoneNum) => {
   if (typeof phoneNum !== "string") {
@@ -23,7 +22,6 @@ const validateNumber = (phoneNum) => {
   }
 };
 module.exports = {
-  registerValidation,
-  loginValidation,
+  stringValidation,
   validateNumber,
 };
