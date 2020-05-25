@@ -5,8 +5,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 
 //auth middlelware
-
 //import routes
+const authRoutes = require("./routes/authRoutes");
 
 const server = express();
 
@@ -25,6 +25,8 @@ server.use(cors());
 server.get("/", (req, res) => {
   res.status(200).json({ api: "its alive!" });
 });
+
+server.use("/api/auth", authRoutes);
 
 
 module.exports = server;

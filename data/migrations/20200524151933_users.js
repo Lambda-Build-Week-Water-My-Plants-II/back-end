@@ -5,6 +5,7 @@ exports.up = function (knex) {
     tbl.string("username", 255).notNullable().unique();
     tbl.string("password", 255).notNullable();
     tbl.string("phone_number",  15).notNullable()
+    tbl.timestamps(true, true) //created at, updated at
   });
 };
 

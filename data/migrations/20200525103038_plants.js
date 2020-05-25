@@ -5,6 +5,7 @@ exports.up = function (knex) {
     tbl.string("species", 255).notNullable();
     tbl.string("h2oFrequency", 255).notNullable();
     tbl.string("image", 255);
+    tbl.timestamps(true, true); //created at, updated at
   });
 };
 
