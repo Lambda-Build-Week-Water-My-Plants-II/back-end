@@ -7,6 +7,7 @@ const helmet = require("helmet");
 //auth middlelware
 //import routes
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const server = express();
 
@@ -27,5 +28,8 @@ server.get("/", (req, res) => {
 });
 
 server.use("/api/auth", authRoutes);
+//use passport to protect endpoints
+const requireLogin = passport.authenticate("jwt", { session: false });
+server.use("/api/user", requireLogin, userRoutes);
 
 module.exports = server;

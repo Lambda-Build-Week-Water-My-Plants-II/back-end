@@ -55,7 +55,7 @@ module.exports.loginUser = async (req, res) => {
         const payload = {
           sub: user.id,
           username: user.username,
-          phone_number: user.phone_number,
+          id: user.id,
         };
         //jwt options
         const options = {
@@ -72,8 +72,8 @@ module.exports.loginUser = async (req, res) => {
             success: true,
             token,
             id: user.id,
-            // username: user.username,
-            // phone_number: user.phone_number,
+            username: user.username,
+            phone_number: user.phone_number,
           });
         });
       } else {
