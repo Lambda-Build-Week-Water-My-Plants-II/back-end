@@ -52,4 +52,4 @@
     image: STRING           // optional
 }
 ```
-![alt text](https://github.com/BW-Better-Professor-App1/Backend/blob/master/betterprofessor_dbdesign.png "Better Professor Database Design")
+![alt text](https://github.com/Lambda-Build-Week-Water-My-Plants-II/back-end/blob/alan-lee/Water_My_Plants_DB_DESIGN.png "Water my plants")
