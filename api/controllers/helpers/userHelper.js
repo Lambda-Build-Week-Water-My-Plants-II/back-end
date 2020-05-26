@@ -9,21 +9,34 @@ const updateUser = async (userInfo) => {
     username: userInfo.username,
   };
   //check to see if username already exists
-  const [existingUser] = await findBy(userObj);
-  if (existingUser) {
-    //if existing user exists do a check of id
-    const compareId = await findById(Number(existingUser.id));
-    if (Number(compareId.id) === Number(existingUser.id)) {
-      return {
-        message: "Username is unavailable, please choose another",
-      };
+  if (userInfo.username) {
+    const [existingUser] = await findBy(userObj);
+    if (existingUser) {
+      //if existing user exists do a check of id
+      const compareId = await findById(Number(existingUser.id));
+      if (Number(compareId.id) === Number(existingUser.id)) {
+        return {
+          message: "Username is unavailable, please choose another",
+        };
+      }
+    } else {
+      try {
+        const [userId] = await db("users")
+          .where({ id: userInfo.id })
+          .returning("id")
+          .update(userInfo);
+        return findById(Number(userId));
+      } catch (err) {
+        throw err;
+      }
     }
   } else {
     try {
+      const { password, phone_number } = userInfo;
       const [userId] = await db("users")
         .where({ id: userInfo.id })
         .returning("id")
-        .update(userInfo);
+        .update({ password, phone_number });
       return findById(Number(userId));
     } catch (err) {
       throw err;
@@ -37,10 +50,10 @@ const findBy = (obj) => {
 
 const deleteUser = (id) => {
   return db("users").where({ id }).returning("id").del();
-}
+};
 
 module.exports = {
   findById,
   updateUser,
-  deleteUser
+  deleteUser,
 };

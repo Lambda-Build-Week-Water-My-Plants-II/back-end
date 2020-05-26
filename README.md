@@ -38,19 +38,19 @@
 #### USERS
 ```js
 {
-    username: STRING     // required
-    password: STRING     // required
-    phone_number: STRING // required example: (999)-999-9999 or 999-999-9999
+    username:     STRING     // required
+    password:     STRING     // required
+    phone_number: STRING     // required example: (999)-999-9999 or 999-999-9999
 }
 ```
 #### Plants
 ```js
 {
-    user_id: INTEGER        // required (handled by backend)
-    nickname: STRING        // required
-    species: STRING         // required
-    h2oFrequency: STRING    // required
-    image: STRING           // optional
+    user_id:        INTEGER      // required (handled by backend)
+    nickname:       STRING       // required
+    species:        STRING       // required
+    h2oFrequency:   STRING       // required
+    image:          STRING       // optional
 }
 ```
 ![alt text](https://github.com/Lambda-Build-Week-Water-My-Plants-II/back-end/blob/alan-lee/Water_My_Plants_DB_DESIGN.png "Water my plants")
