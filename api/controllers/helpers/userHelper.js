@@ -20,27 +20,22 @@ const updateUser = async (userInfo) => {
         };
       }
     } else {
-      try {
-        const [userId] = await db("users")
-          .where({ id: userInfo.id })
-          .returning("id")
-          .update(userInfo);
-        return findById(Number(userId));
-      } catch (err) {
-        throw err;
-      }
+      return updateQuery(userInfo);
     }
   } else {
-    try {
-      const { password, phone_number } = userInfo;
-      const [userId] = await db("users")
-        .where({ id: userInfo.id })
-        .returning("id")
-        .update({ password, phone_number });
-      return findById(Number(userId));
-    } catch (err) {
-      throw err;
-    }
+    return updateQuery(userInfo);
+  }
+};
+
+const updateQuery = async (obj) => {
+  try {
+    const [userId] = await db("users")
+      .where({ id: obj.id })
+      .returning("id")
+      .update(obj);
+    return findById(Number(userId));
+  } catch (err) {
+    throw err;
   }
 };
 
