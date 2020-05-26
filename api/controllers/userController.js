@@ -65,9 +65,26 @@ module.exports.updateUser = async (req, res) => {
   }
 };
 
-
 //DELETE - Deletes the users account
-module.exports.deleteUser = async (req,res) => {
+module.exports.deleteUser = async (req, res) => {
   const paramsId = req.params.userId;
+  const userId = req.user.id;
 
-}
+  if (Number(paramsId) !== Number(userId)) {
+    res.status(401).json({ message: "Unauthorized, please login" });
+  }
+  try {
+    const [deletedUserId] = await Users.deleteUser(Number(userId));
+    if (deletedUserId) {
+      res
+        .status(200)
+        .json({ message: `Deleted user with id of ${deletedUserId}` });
+    } else {
+      res
+        .status(404)
+        .json({ message: "Could not find the user with given id" });
+    }
+  } catch (err) {
+    res.status(500).json({ msg: "An error has occured", err: err.message });
+  }
+};

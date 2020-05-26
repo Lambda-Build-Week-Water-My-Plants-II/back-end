@@ -31,13 +31,16 @@ const updateUser = async (userInfo) => {
   }
 };
 
-// const updateUserName = async ()
-
 const findBy = (obj) => {
   return db("users").where(obj);
 };
 
+const deleteUser = (id) => {
+  return db("users").where({ id }).returning("id").del();
+}
+
 module.exports = {
   findById,
   updateUser,
+  deleteUser
 };
