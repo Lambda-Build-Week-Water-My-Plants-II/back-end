@@ -64,3 +64,10 @@ module.exports.updateUser = async (req, res) => {
     res.status(500).json({ msg: "An error has occured", err: err.message });
   }
 };
+
+
+//DELETE - Deletes the users account
+module.exports.deleteUser = async (req,res) => {
+  const paramsId = req.params.userId;
+
+}

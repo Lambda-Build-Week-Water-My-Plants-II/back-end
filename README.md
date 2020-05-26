@@ -46,6 +46,7 @@
 #### Plants
 ```js
 {
+    user_id: INTEGER        // required (handled by backend)
     nickname: STRING        // required
     species: STRING         // required
     h2oFrequency: STRING    // required
