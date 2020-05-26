@@ -50,11 +50,26 @@ module.exports.updateUser = async (req, res) => {
           phone_number,
           id,
         };
-        const updatedUser = await Users.updateUser(updatedInfo);
-        if (updatedInfo.username) {
-          res.status(200).json(updatedUser);
-        } else {
-          res.status(400).json({ message: newUser.message });
+        if (req.user.username === req.body.username) {
+          const updatedUser = await Users.updateUser({
+            password: updatedInfo.password,
+            phone_number: updatedInfo.phone_number,
+            id,
+          });
+          if (updatedUser.username) {
+            res.status(200).json(updatedUser);
+          } else {
+            res
+              .status(400)
+              .json({ message: "Could not update user information" });
+          }
+        } else if (req.user.username !== req.body.username) {
+          const updatedUser = await Users.updateUser(updatedInfo);
+          if (updatedInfo.username) {
+            res.status(200).json(updatedUser);
+          } else {
+            res.status(400).json({ message: updatedUser.message });
+          }
         }
       }
     } else {
