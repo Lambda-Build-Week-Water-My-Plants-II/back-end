@@ -5,7 +5,8 @@ const userCtrl = require("../controllers/userController");
 
 //GET - Returns the current user information
 router.route("/").get(userCtrl.getUser);
-
+//PUT - Updates user information
+router.route("/:userId").put(userCtrl.updateUser);
 
 
 
