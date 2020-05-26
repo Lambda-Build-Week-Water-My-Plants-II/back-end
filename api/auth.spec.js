@@ -80,4 +80,54 @@ describe("AUTH ROUTES", () => {
     //check for hashed password
     expect(response.body.phone_number).toBeDefined();
   });
+
+  //Test POST for /login
+  describe("/api/auth/login", () => {
+    //create user and logs in
+    it("should create a user and login with that credential and respond with 200", async () => {
+      const expectedStatus = 200;
+      const userInfo = {
+        username: "method",
+        password: "password",
+        phone_number: "111-111-1111",
+      };
+      const registration = await request(server)
+        .post("/api/auth/register")
+        .send(userInfo);
+      const credentials = {
+        username: "method",
+        password: "password",
+      };
+      //log user in
+      const loginUser = await request(server)
+        .post("/api/auth/login")
+        .send(credentials);
+      expect(loginUser.status).toEqual(expectedStatus);
+    });
+
+    it("should have an object containing token and the id on sucess  ", async () => {
+      const expectedStatus = 200;
+      const userInfo = {
+        username: "method",
+        password: "password",
+        phone_number: "111-111-1111",
+      };
+      const registration = await request(server)
+        .post("/api/auth/register")
+        .send(userInfo);
+      const credentials = {
+        username: "method",
+        password: "password",
+      };
+      const loginUser = await request(server)
+        .post("/api/auth/login")
+        .send(credentials);
+      //have success
+      expect(loginUser.body.success).toBeDefined();
+      //have token
+      expect(loginUser.body.token).toBeDefined();
+      //have id
+      expect(loginUser.body.id).toBeDefined();
+    });
+  });
 });
