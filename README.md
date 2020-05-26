@@ -1,5 +1,5 @@
 # Backend
-#### Production branch deployed at
+#### Production branch deployed at https://limitless-earth-34461.herokuapp.com/
 ##### Seeded information can be accessed by logging in with the following credentials
 ```
 
@@ -52,3 +52,4 @@
     image: STRING           // optional
 }
 ```
+![alt text](https://github.com/BW-Better-Professor-App1/Backend/blob/master/betterprofessor_dbdesign.png "Better Professor Database Design")
