@@ -2,7 +2,7 @@
 #### Production branch deployed at https://limitless-earth-34461.herokuapp.com/
 ##### Seeded information can be accessed by logging in with the following credentials
 ```
-username: test
+username: test1
 password: password
 ```
 
