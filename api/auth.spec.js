@@ -129,5 +129,63 @@ describe("AUTH ROUTES", () => {
       //have id
       expect(loginUser.body.id).toBeDefined();
     });
+
+    it("should have an error code of 401 if wrong credentials are entered  ", async () => {
+      const expectedStatus = 401;
+      const userInfo = {
+        username: "method",
+        password: "password",
+        phone_number: "111-111-1111",
+      };
+      const registration = await request(server)
+        .post("/api/auth/register")
+        .send(userInfo);
+      const credentials = {
+        username: "method",
+        password: "passwor",
+      };
+      const loginUser = await request(server)
+        .post("/api/auth/login")
+        .send(credentials);
+      expect(loginUser.status).toEqual(expectedStatus);
+    });
+    it("should have an error code of 400 if missing password  ", async () => {
+      const expectedStatus = 400;
+      const userInfo = {
+        username: "method",
+        password: "password",
+        phone_number: "111-111-1111",
+      };
+      const registration = await request(server)
+        .post("/api/auth/register")
+        .send(userInfo);
+      const credentials = {
+        username: "method",
+        // password: "passwor",
+      };
+      const loginUser = await request(server)
+        .post("/api/auth/login")
+        .send(credentials);
+      expect(loginUser.status).toEqual(expectedStatus);
+    });
+    it("should have an error code of 400 if missing username  ", async () => {
+      const expectedStatus = 400;
+      const userInfo = {
+        username: "method",
+        password: "password",
+        phone_number: "111-111-1111",
+      };
+      const registration = await request(server)
+        .post("/api/auth/register")
+        .send(userInfo);
+      const credentials = {
+        // username: "method",
+        password: "passwor",
+      };
+      const loginUser = await request(server)
+        .post("/api/auth/login")
+        .send(credentials);
+      expect(loginUser.status).toEqual(expectedStatus);
+    });
   });
 });
