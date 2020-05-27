@@ -54,4 +54,4 @@ password: password
     image:          STRING       // optional
 }
 ```
-![alt text](https://github.com/Lambda-Build-Week-Water-My-Plants-II/back-end/blob/alan-lee/Water_My_Plants_DB_DESIGN.png "Water my plants")
+![alt text](https://github.com/Lambda-Build-Week-Water-My-Plants-II/back-end/blob/master/Water_My_Plants_DB_DESIGN.png "Water my plants")
