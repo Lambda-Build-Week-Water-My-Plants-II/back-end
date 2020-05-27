@@ -36,7 +36,7 @@ password: password
 
 # Data Schema
 
-#### USERS
+#### Users
 ```js
 {
     username:     STRING     // required
