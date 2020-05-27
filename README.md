@@ -2,7 +2,7 @@
 #### Production branch deployed at https://limitless-earth-34461.herokuapp.com/
 ##### Seeded information can be accessed by logging in with the following credentials
 ```
-username: test
+username: test1
 password: password
 ```
 
@@ -54,4 +54,5 @@ password: password
     image:          STRING       // optional
 }
 ```
+
 ![alt text](https://github.com/Lambda-Build-Week-Water-My-Plants-II/back-end/blob/master/Water_My_Plants_DB_DESIGN.png "Water my plants")
