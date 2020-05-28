@@ -209,110 +209,147 @@ describe("PLANT ROUTES", () => {
 
       expect(response.status).toEqual(expectedStatus);
     });
+  });
+  describe("PUT route /api/plants/:id", () => {
+    it("should return a 400 status if nickanme is not provided", async () => {
+      const expectedStatus = 400;
+      const plantInfo = {
+        // nickname: 'plant',
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .put("/api/plants/2")
+        .set("Authorization", token)
+        .send(plantInfo);
 
-    describe("PUT route /api/plants/:id", () => {
-      it("should return a 400 status if nickanme is not provided", async () => {
-        const expectedStatus = 400;
-        const plantInfo = {
-          // nickname: 'plant',
-          species: "species",
-          h2oFrequency: "hight",
-        };
-        const response = await request(server)
-          .put("/api/plants/2")
-          .set("Authorization", token)
-          .send(plantInfo);
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a 400 status if species is not provided", async () => {
+      const expectedStatus = 400;
+      const plantInfo = {
+        nickname: "plant",
+        // species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .put("/api/plants/2")
+        .set("Authorization", token)
+        .send(plantInfo);
 
-        expect(response.status).toBe(expectedStatus);
-      });
-      it("should return a 400 status if species is not provided", async () => {
-        const expectedStatus = 400;
-        const plantInfo = {
-          nickname: "plant",
-          // species: "species",
-          h2oFrequency: "hight",
-        };
-        const response = await request(server)
-          .put("/api/plants/2")
-          .set("Authorization", token)
-          .send(plantInfo);
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a 400 status if h2ofrequency is not provided", async () => {
+      const expectedStatus = 400;
+      const plantInfo = {
+        // nickname: "plant",
+        // species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .put("/api/plants/2")
+        .set("Authorization", token)
+        .send(plantInfo);
 
-        expect(response.status).toBe(expectedStatus);
-      });
-      it("should return a 400 status if h2ofrequency is not provided", async () => {
-        const expectedStatus = 400;
-        const plantInfo = {
-          // nickname: "plant",
-          // species: "species",
-          h2oFrequency: "hight",
-        };
-        const response = await request(server)
-          .put("/api/plants/2")
-          .set("Authorization", token)
-          .send(plantInfo);
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a 200 status on success", async () => {
+      const expectedStatus = 200;
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .put("/api/plants/2")
+        .set("Authorization", token)
+        .send(plantInfo);
 
-        expect(response.status).toBe(expectedStatus);
-      });
-      it("should return a 200 status on success", async () => {
-        const expectedStatus = 200;
-        const plantInfo = {
-          nickname: "plant",
-          species: "species",
-          h2oFrequency: "hight",
-        };
-        const response = await request(server)
-          .put("/api/plants/2")
-          .set("Authorization", token)
-          .send(plantInfo);
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a 404 status if plant is not found", async () => {
+      const expectedStatus = 404;
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .put("/api/plants/223")
+        .set("Authorization", token)
+        .send(plantInfo);
 
-        expect(response.status).toBe(expectedStatus);
-      });
-      it("should return a 404 status if plant is not found", async () => {
-        const expectedStatus = 404;
-        const plantInfo = {
-          nickname: "plant",
-          species: "species",
-          h2oFrequency: "hight",
-        };
-        const response = await request(server)
-          .put("/api/plants/223")
-          .set("Authorization", token)
-          .send(plantInfo);
+      expect(response.status).toBe(expectedStatus);
+    });
 
-        expect(response.status).toBe(expectedStatus);
-      });
+    it("should return a plant object on success", async () => {
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .put("/api/plants/1")
+        .set("Authorization", token)
+        .send(plantInfo);
 
-      it("should return a plant object on success", async () => {
-        const plantInfo = {
-          nickname: "plant",
-          species: "species",
-          h2oFrequency: "hight",
-        };
-        const response = await request(server)
-          .put("/api/plants/1")
-          .set("Authorization", token)
-          .send(plantInfo);
+      expect(response.body[0].id).toBeDefined();
+      expect(response.body[0].nickname).toBeDefined();
+      expect(response.body[0].species).toBeDefined();
+      expect(response.body[0].h2oFrequency).toBeDefined();
+    });
+    it("should return a 401 status if user is not logged in", async () => {
+      const expectedStatus = 401;
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const unauthorizedToken = "234234123";
+      const response = await request(server)
+        .put("/api/plants/")
+        .set("Authorization", unauthorizedToken)
+        .send(plantInfo);
 
-        expect(response.body[0].id).toBeDefined();
-        expect(response.body[0].nickname).toBeDefined();
-        expect(response.body[0].species).toBeDefined();
-        expect(response.body[0].h2oFrequency).toBeDefined();
-      });
-      it("should return a 401 status if user is not logged in", async () => {
-        const expectedStatus = 401;
-        const plantInfo = {
-          nickname: "plant",
-          species: "species",
-          h2oFrequency: "hight",
-        };
-        const unauthorizedToken = "234234123";
-        const response = await request(server)
-          .put("/api/plants/")
-          .set("Authorization", unauthorizedToken)
-          .send(plantInfo);
+      expect(response.status).toEqual(expectedStatus);
+    });
+  });
+  describe("DELETE route /api/plants/:id", () => {
+    it("should return a 401 status if user is not logged in", async () => {
+      const expectedStatus = 401;
 
-        expect(response.status).toEqual(expectedStatus);
-      });
+      const unauthorizedToken = "234234123";
+      const response = await request(server)
+        .delete("/api/plants/1")
+        .set("Authorization", unauthorizedToken);
+
+      expect(response.status).toEqual(expectedStatus);
+    });
+    it("should return a 404 status if the plant is not found", async () => {
+      const expectedStatus = 404;
+
+      const response = await request(server)
+        .delete("/api/plants/122")
+        .set("Authorization", token);
+
+      expect(response.status).toEqual(expectedStatus);
+    });
+    it("should return a 200 status on success", async () => {
+      const expectedStatus = 200;
+
+      const response = await request(server)
+        .delete("/api/plants/1")
+        .set("Authorization", token);
+
+      expect(response.status).toEqual(expectedStatus);
+    });
+    it("should respond with an object on success", async () => {
+      const response = await request(server)
+        .delete("/api/plants/1")
+        .set("Authorization", token);
+
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toEqual(`Plant deleted with id of 1`);
     });
   });
 });
