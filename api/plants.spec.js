@@ -80,7 +80,44 @@ describe("PLANT ROUTES", () => {
         message: "This user does not have any plants",
       });
     });
-    
-
   });
+
+  describe("GET /api/plants/:id", () => {
+    it("should return and object containing a single plant", async () => {
+      const response = await request(server)
+        .get("/api/plants/1")
+        .set("Authorization", token);
+
+      expect(response.body.id).toBeDefined();
+      expect(response.body.nickname).toBeDefined();
+      expect(response.body.species).toBeDefined();
+    });
+    it("should return a status code of 200", async () => {
+      const expectedStatus = 200;
+      const response = await request(server)
+        .get("/api/plants/1")
+        .set("Authorization", token);
+
+      expect(response.status).toEqual(expectedStatus);
+    });
+    it("should return a status code of 404 if no plant found wiht that id", async () => {
+      const expectedStatus = 404;
+      const response = await request(server)
+        .get("/api/plants/231")
+        .set("Authorization", token);
+
+      expect(response.status).toEqual(expectedStatus);
+    });
+    it("should return a message no plant found with that id", async () => {
+      const response = await request(server)
+        .get("/api/plants/231")
+        .set("Authorization", token);
+
+      expect(response.body.message).toBeDefined();
+      expect(response.body.message).toEqual("No plant by that id");
+      expect(response.body).toEqual({ message: "No plant by that id" });
+    });
+  });
+
+  
 });
