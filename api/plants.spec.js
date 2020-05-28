@@ -119,5 +119,97 @@ describe("PLANT ROUTES", () => {
     });
   });
 
-  
+  describe("POST routes /api/plants", () => {
+    it("should return a 400 status if nickanme is not provided", async () => {
+      const expectedStatus = 400;
+      const plantInfo = {
+        // nickname: 'plant',
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .post("/api/plants/")
+        .set("Authorization", token)
+        .send(plantInfo);
+
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a 400 status if species is not provided", async () => {
+      const expectedStatus = 400;
+      const plantInfo = {
+        nickname: "plant",
+        // species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .post("/api/plants/")
+        .set("Authorization", token)
+        .send(plantInfo);
+
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a 400 status if h2ofrequency is not provided", async () => {
+      const expectedStatus = 400;
+      const plantInfo = {
+        // nickname: "plant",
+        // species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .post("/api/plants/")
+        .set("Authorization", token)
+        .send(plantInfo);
+
+      expect(response.status).toBe(expectedStatus);
+    });
+
+    it("should return a 201 status on success", async () => {
+      const expectedStatus = 201;
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .post("/api/plants/")
+        .set("Authorization", token)
+        .send(plantInfo);
+
+      expect(response.status).toBe(expectedStatus);
+    });
+    it("should return a plant object on success", async () => {
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const response = await request(server)
+        .post("/api/plants/")
+        .set("Authorization", token)
+        .send(plantInfo);
+
+      expect(response.body[0].id).toBeDefined();
+      expect(response.body[0].nickname).toBeDefined();
+      expect(response.body[0].species).toBeDefined();
+      expect(response.body[0].h2oFrequency).toBeDefined();
+    });
+
+    it("should return a 401 status if user is not logged in", async () => {
+      const expectedStatus = 401;
+      const plantInfo = {
+        nickname: "plant",
+        species: "species",
+        h2oFrequency: "hight",
+      };
+      const unauthorizedToken = "234234123";
+      const response = await request(server)
+        .post("/api/plants/")
+        .set("Authorization", unauthorizedToken)
+        .send(plantInfo);
+
+      expect(response.status).toEqual(expectedStatus);
+    });
+
+    
+  });
 });
