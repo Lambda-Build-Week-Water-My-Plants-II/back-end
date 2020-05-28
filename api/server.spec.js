@@ -1,7 +1,6 @@
 const request = require("supertest");
 const server = require("./server");
 
-
 describe("server", () => {
   describe("server", () => {
     it("can run tests", () => {
