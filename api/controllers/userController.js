@@ -86,7 +86,7 @@ module.exports.deleteUser = async (req, res) => {
   const userId = req.user.id;
 
   if (Number(paramsId) !== Number(userId)) {
-    res.status(401).json({ message: "Unauthorized, please login" });
+    return res.status(401).json({ message: "Unauthorized, please login" });
   }
   try {
     const [deletedUserId] = await Users.deleteUser(Number(userId));

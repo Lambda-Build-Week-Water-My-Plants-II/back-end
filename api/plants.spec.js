@@ -22,6 +22,7 @@ beforeEach(async () => {
 });
 
 describe("PLANT ROUTES", () => {
+  //GET route for all plants
   describe("GET /api/plants", () => {
     it("should return a status of 200 there are plants for that user", async () => {
       const expectedStatus = 200;
@@ -82,6 +83,7 @@ describe("PLANT ROUTES", () => {
     });
   });
 
+  //GET route for specific plant
   describe("GET /api/plants/:id", () => {
     it("should return and object containing a single plant", async () => {
       const response = await request(server)
@@ -119,6 +121,7 @@ describe("PLANT ROUTES", () => {
     });
   });
 
+  //POST route to create new plants
   describe("POST routes /api/plants", () => {
     it("should return a 400 status if nickanme is not provided", async () => {
       const expectedStatus = 400;
@@ -210,6 +213,8 @@ describe("PLANT ROUTES", () => {
       expect(response.status).toEqual(expectedStatus);
     });
   });
+
+  //PUT route to update a plant
   describe("PUT route /api/plants/:id", () => {
     it("should return a 400 status if nickanme is not provided", async () => {
       const expectedStatus = 400;
@@ -314,6 +319,8 @@ describe("PLANT ROUTES", () => {
       expect(response.status).toEqual(expectedStatus);
     });
   });
+
+  //DELETE route to remove a plant
   describe("DELETE route /api/plants/:id", () => {
     it("should return a 401 status if user is not logged in", async () => {
       const expectedStatus = 401;

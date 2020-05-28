@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
   const plantsObj = {
     ...post,
     user_id: req.user.id,
+    image: req.body.image ? req.body.image : "https://i.imgur.com/xxQpUF6.jpg",
   };
 
   if (isValid(post)) {
