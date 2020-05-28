@@ -80,7 +80,7 @@ router.put("/:id", async (req, res) => {
     try {
       const [foundPlant] = await db("plants").where({ id: plantId });
       if (!foundPlant) {
-        res.status(404).json({ message: "No plant found with that id" });
+        return res.status(404).json({ message: "No plant found with that id" });
       }
       if (Number(foundPlant.id) === plantId) {
         const [updatedPlantId] = await db("plants")
@@ -120,7 +120,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const [foundPlant] = await db("plants").where({ id: plantId });
     if (!foundPlant) {
-      res.status(404).json({ message: "No plant found with that id" });
+      return res.status(404).json({ message: "No plant found with that id" });
     }
     if (Number(foundPlant.user_id) === userId) {
       const [deletedPlant] = await db("plants")
