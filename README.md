@@ -17,7 +17,7 @@ password: password
 
 
 #### User Routes
-## These endpoints are protected, you will need to be logged in to access them.
+These endpoints are protected, you will need to be logged in to access them.
 
 | Method | Endpoint                 |  Description                                                                         |
 | ------ | ------------------------ |  ----------------------------------------------------------------------------------- |
@@ -26,7 +26,7 @@ password: password
 | DELETE | `/api/user/:id`          |  Deletes user with the matching id            |
 
 #### Plant Routes
-## These endpoints are protected, you will need to be logged in to access them.
+These endpoints are protected, you will need to be logged in to access them.
 
 | Method | Endpoint                     |  Description                                                                       |
 | ------ | -----------------------      |  --------------------------------------------------------------------------------- |
